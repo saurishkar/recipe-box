@@ -11,6 +11,13 @@ function mapDispatchToProps(dispatch) {
 				dispatch({
 					type: 'CREATE_RECIPE'
 				});
+				const promise2 = Recipe.FetchAll();
+				promise2.then((snap) => {
+					dispatch({
+						type: 'FETCH_ALL_RECIPES',
+						payload: snap.val()
+					});
+				});
 			});
 			return promise;
 		}
