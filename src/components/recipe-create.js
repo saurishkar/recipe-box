@@ -8,7 +8,22 @@ class RecipeCreate extends Component {
 			name: '',
 			ingredients: ''
 		};
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
+
+	handleSubmit(event) {
+		event.preventDefault();
+		const { name, ingredients } = this.state; 
+		const data = {
+			name,
+			ingredients
+		};
+		const promise = this.props.CreateRecipe(data);
+		promise.then(() => {
+			this.props.closeModal();
+		});
+	}
+
 	render() {
 		return (
 			<div className="recipe-create-modal">
@@ -44,7 +59,7 @@ class RecipeCreate extends Component {
 						</Modal.Body>
 						<Modal.Footer>
 							<div className="btn-group">
-								<button className="btn btn-md btn-primary" type="submit">Submit</button>
+								<button className="btn btn-md btn-primary" type="submit" onClick={this.handleSubmit}>Submit</button>
 								<a role="button" tabIndex="-1" className="btn btn-default btn-md" onClick={() => this.props.closeModal()}>Cancel</a>
 							</div>
 						</Modal.Footer>

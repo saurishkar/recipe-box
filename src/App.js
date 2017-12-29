@@ -7,7 +7,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import RecipeBox from './components/recipe-box';
-import * as reducers from './reducers';
+import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxThunk, logger)(createStore);
 
