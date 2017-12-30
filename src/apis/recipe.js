@@ -8,6 +8,10 @@ const Recipe = {
 	FetchAll: () => {
 		const promise = firebase.database().ref('/recipes').once('value');
 		return promise;
+	},
+	Update: (data, id) => {
+		const promise = firebase.database().ref(`/recipes/${id}`).set(data);
+		return promise;
 	}
 };
 

@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { Collapse } from 'react-bootstrap';
 
+import RecipeEditConnector from '../containers/recipe-edit-connector';
+
 class RecipeItem extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showItem: false
+			showItem: false,
+			showEditModal: false
 		};
 		this.splitIngredients = this.splitIngredients.bind(this);
+		this.closeEditModal = this.closeEditModal.bind(this);
 	}
 
 	splitIngredients(str) {
@@ -20,6 +24,12 @@ class RecipeItem extends Component {
 			);
 		});
 		return renderIng;
+	}
+
+	closeEditModal() {
+		this.setState({
+			showEditModal: false
+		});
 	}
 	
 	render() {
@@ -39,11 +49,17 @@ class RecipeItem extends Component {
 							</ul>
 							<div className="btn-group">
 								<button className="btn btn-danger btn-md">Delete</button>
-								<button className="btn btn-md btn-default">Edit</button>
+								<button className="btn btn-md btn-default" onClick={() => this.setState({showEditModal: true})}>Edit</button>
 							</div>
 						</div>
 					</Collapse>
 				</div>
+				<RecipeEditConnector 
+					name={recipes[id].name} 
+					ingredients={recipes[id].ingredients} 
+					showModal={this.state.showEditModal}
+					closeModal={this.closeEditModal} 
+					id = {id} />
 			</div>
 		);
 	}
