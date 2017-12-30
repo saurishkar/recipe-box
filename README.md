@@ -9,11 +9,11 @@
 
 ## Installation
 
-`mkdir react-recipe-box`
-`cd react-recipe-box`
-`git clone git@github.com:saurishkar/recipe-box.git`
-`npm install`
-`npm start`
+*  `mkdir react-recipe-box`
+*  `cd react-recipe-box`
+*  `git clone git@github.com:saurishkar/recipe-box.git`
+*  `npm install`
+* `npm start`
 
 ## License
 MIT
