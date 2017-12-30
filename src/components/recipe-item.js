@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import { Collapse } from 'react-bootstrap';
 
 import RecipeEditConnector from '../containers/recipe-edit-connector';
+import RecipeDeleteConnector from '../containers/recipe-delete-connector';
 
 class RecipeItem extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			showItem: false,
-			showEditModal: false
+			showEditModal: false,
+			showDeleteModal: false
 		};
 		this.splitIngredients = this.splitIngredients.bind(this);
 		this.closeEditModal = this.closeEditModal.bind(this);
+		this.closeDeleteModal = this.closeDeleteModal.bind(this);
 	}
 
 	splitIngredients(str) {
@@ -31,6 +34,12 @@ class RecipeItem extends Component {
 			showEditModal: false
 		});
 	}
+
+	closeDeleteModal() {
+		this.setState({
+			showDeleteModal: false
+		});
+	}
 	
 	render() {
 		const { id, recipes } = this.props;
@@ -48,7 +57,7 @@ class RecipeItem extends Component {
 								{this.splitIngredients(recipes[id].ingredients)}
 							</ul>
 							<div className="btn-group">
-								<button className="btn btn-danger btn-md">Delete</button>
+								<button className="btn btn-danger btn-md" onClick={() => this.setState({showDeleteModal: true})}>Delete</button>
 								<button className="btn btn-md btn-default" onClick={() => this.setState({showEditModal: true})}>Edit</button>
 							</div>
 						</div>
@@ -59,7 +68,13 @@ class RecipeItem extends Component {
 					ingredients={recipes[id].ingredients} 
 					showModal={this.state.showEditModal}
 					closeModal={this.closeEditModal} 
-					id = {id} />
+					id = {id} 
+				/>
+				<RecipeDeleteConnector
+					showModal = {this.state.showDeleteModal}
+					closeModal = {this.closeDeleteModal}
+					id = {id}
+				/>
 			</div>
 		);
 	}
