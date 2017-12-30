@@ -12,6 +12,10 @@ const Recipe = {
 	Update: (data, id) => {
 		const promise = firebase.database().ref(`/recipes/${id}`).set(data);
 		return promise;
+	},
+	Delete: (id) => {
+		const promise = firebase.database().ref(`/recipes/${id}`).remove();
+		return promise;
 	}
 };
 
